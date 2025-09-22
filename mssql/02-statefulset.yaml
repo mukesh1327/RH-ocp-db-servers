@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+
+  name: mssql-k8s
+
+  labels:
+    app: mssql-k8s
+    app.openshift.io/runtime: mssql
+
+spec:
+
+  serviceName: mssql-k8s
+
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mssql-k8s
+
+  template:
+
+    metadata:
+
+      labels:
+        app: mssql-k8s
+        
+    spec:
+      securityContext:
+        fsGroup: 10001
+
+      serviceAccountName: mssql-k8s-sa
+
+      containers:
+
+        - name: mssql-k8s
+
+          image: mcr.microsoft.com/mssql/rhel/server:2022-latest
+          # image: mcr.microsoft.com/mssql/server:2022-latest
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+
+          env:
+            - name: ACCEPT_EULA
+              value: 'Y'
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql-k8s-configs
+                  key: MSSQL_SA_PASSWORD
+
+          resources:
+            limits:
+              cpu: 1500m
+              memory: 2Gi
+            requests:
+              cpu: 1500m
+              memory: 2Gi
+
+          volumeMounts:
+            - name: mssql-data
+              mountPath: /var/opt/mssql
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mssql-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi

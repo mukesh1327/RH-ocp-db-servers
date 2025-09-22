@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgresql-k8s
+  labels:
+    app: postgresql-k8s
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 5432-tcp
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+  selector:
+    app: postgresql-k8s
