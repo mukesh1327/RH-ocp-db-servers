@@ -42,7 +42,7 @@ spec:
           imagePullPolicy: Always
 
           ports:
-            - containerPort: 5432
+            - containerPort: 1433
               protocol: TCP
 
           env:
@@ -57,10 +57,10 @@ spec:
           resources:
             limits:
               cpu: 1500m
-              memory: 2Gi
+              memory: 4Gi
             requests:
               cpu: 1500m
-              memory: 2Gi
+              memory: 4Gi
 
           volumeMounts:
             - name: mssql-data
@@ -73,4 +73,4 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 5Gi
+            storage: 10Gi

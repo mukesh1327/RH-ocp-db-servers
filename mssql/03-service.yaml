@@ -8,10 +8,10 @@ spec:
   ipFamilies:
     - IPv4
   ports:
-    - name: 5432-tcp
+    - name: 1433-tcp
       protocol: TCP
-      port: 5432
-      targetPort: 5432
+      port: 1433
+      targetPort: 1433
   type: ClusterIP
   selector:
     app: mssql-k8s
