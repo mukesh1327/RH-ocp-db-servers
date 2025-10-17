@@ -69,6 +69,8 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: mssql-data
+      labels:
+        app: mssql-k8s
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

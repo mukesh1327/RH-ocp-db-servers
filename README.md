@@ -21,6 +21,12 @@ Delete deployed server
 ```shell script
 oc delete -f postgresql -n project_name
 
+# check pvc is delete
+
+oc get pvc
+
+oc delete pvc pvc_name
+
 # or delete each resource individually from CLI or Console
 ```
 
@@ -46,6 +52,13 @@ Delete deployed server
 
 ```shell script
 oc delete -f mssql -n project_name
+
+
+# check pvc is delete
+
+oc get pvc
+
+oc delete pvc pvc_name
 
 # or delete each resource individually from CLI or Console
 ```
