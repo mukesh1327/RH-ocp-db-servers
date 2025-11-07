@@ -12,6 +12,6 @@ spec:
       protocol: TCP
       port: 1433
       targetPort: 1433
-  type: LoadBalancer
+  type: LoadBalancer   # Assigns IP to DB service based on IP address pool in MetalLB load balancer
   selector:
     app: mssql-k8s

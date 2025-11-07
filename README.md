@@ -4,6 +4,10 @@ Note: Role binding with SCC in manifests are only for Openshift and not for K8s
 
 <!-- oc label ns ocp-dbs db-env=dev -->
 
+Note: 
+ - Metallb is used for Service type LoadBalancer incase openshift is installed in Baremetal/None infrastructure
+ - In other Managed platforms such as AWS, ROSA, Azure, ARO IPs are assigned automatically  
+
 ## 1. Postgres SQL
 
 Deploy as statefulset
