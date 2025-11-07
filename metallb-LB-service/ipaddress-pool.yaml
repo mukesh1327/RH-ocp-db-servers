@@ -1,0 +1,33 @@
+kind: IPAddressPool
+apiVersion: metallb.io/v1beta1
+metadata:
+  name: dbs-ippool
+  namespace: metallb-system
+spec:
+  addresses:
+    - 192.168.10.5/32               # For assigning single IP
+    # - 192.168.10.0/24             # To assign within this IP CIDR range
+    # - 192.168.10.1-192.168.10.10  # To assign within start and end IP range, included provided IPs too
+    # - 'fc00:f853:0ccd:e799::/124'   # Assigning IPv6 ips
+
+  autoAssign: true                  # Assigns free available IP to service
+
+  avoidBuggyIPs: false              # Eliminates GW and Broadcast IPs
+  
+  serviceAllocation:                # Allocate to a particular service (Namespace labels and service labels)
+
+    namespaceSelectors:
+      - matchLabels:
+          db-env: dev
+
+    namespaces:
+      - ocp-dbs
+
+    priority: 1
+
+    # serviceSelectors:
+    #   - matchExpressions:
+    #       - key: app
+    #         operator: In
+    #         values:
+    #           - mssql-k8s

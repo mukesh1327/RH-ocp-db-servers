@@ -2,6 +2,8 @@
 
 Note: Role binding with SCC in manifests are only for Openshift and not for K8s
 
+<!-- oc label ns ocp-dbs db-env=dev -->
+
 ## 1. Postgres SQL
 
 Deploy as statefulset
